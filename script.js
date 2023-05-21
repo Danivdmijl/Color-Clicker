@@ -2,6 +2,9 @@ var score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score
 var upgradeLevel = localStorage.getItem("upgradeLevel") ? parseInt(localStorage.getItem("upgradeLevel")) : 0;
 var upgradeCost = localStorage.getItem("upgradeCost") ? parseInt(localStorage.getItem("upgradeCost")) : 10;
 var pointsPerClick = localStorage.getItem("pointsPerClick") ? parseInt(localStorage.getItem("pointsPerClick")) : 1;
+var clickCount = 0;
+var cps = 0;
+var cpsInterval;
 
 // Function to generate a random color
 function generateRandomColor() {
@@ -25,6 +28,7 @@ function handleClick() {
   score += (upgradeLevel + 1) * pointsPerClick;
   document.getElementById("score").textContent = "Score: " + score;
   updateColor();
+  clickCount++;
   
   if (score >= upgradeCost) {
     document.getElementById("upgrade-button").disabled = false;
@@ -38,7 +42,7 @@ function handleUpgradeClick() {
   if (score >= upgradeCost) {
     score -= upgradeCost;
     upgradeLevel++;
-    upgradeCost *= 2;
+    upgradeCost = Math.floor(upgradeCost * 1.5);
     pointsPerClick++;
     document.getElementById("score").textContent = "Score: " + score;
     document.getElementById("upgrade").textContent = "Upgrade: " + upgradeLevel;
@@ -47,6 +51,13 @@ function handleUpgradeClick() {
     
     saveDataToLocalStorage();
   }
+}
+
+// Function to update the CPS counter
+function updateCPS() {
+  cps = clickCount;
+  document.getElementById("cps").textContent = "CPS: " + cps;
+  clickCount = 0;
 }
 
 // Function to save data to localStorage
@@ -78,9 +89,12 @@ document.getElementById("color-box").addEventListener("click", handleClick);
 document.getElementById("upgrade-button").addEventListener("click", handleUpgradeClick);
 document.getElementById("reset-button").addEventListener("click", handleResetClick);
 
+// Start CPS counter
+cpsInterval = setInterval(updateCPS, 1000);
+
 // Initial setup
 updateColor();
 document.getElementById("score").textContent = "Score: " + score;
 document.getElementById("upgrade").textContent = "Upgrade: " + upgradeLevel;
 document.getElementById("upgrade-button").textContent = "Buy Upgrade (" + upgradeCost + " points)";
-document.getElementById("upgrade-button").disabled = score < upgradeCost;
+document.getElementById("cps").textContent = "CPS: " + cps;

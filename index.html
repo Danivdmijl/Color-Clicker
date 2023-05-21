@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Color Clicker</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <h1>Color Clicker</h1>
-  <p id="score">Score: 0</p>
-  <div id="color-box"></div>
-  <p id="upgrade">Upgrade: 0</p>
-  <div class="button__Wrapper">
-    <button id="upgrade-button">Buy Upgrade (10 points)</button>
-    <button id="reset-button">Reset Game</button>
-  </div>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Clicker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Clicker Game</h1>
+  <div id="game-container">
+    <div id="color-box"></div>
+    <div class="button__Wrapper">
+      <div id="score">Score: 0</div>
+      <div id="cps">CPS: 0</div>
+      <div id="upgrade">Upgrade: 0</div>
+      <button id="upgrade-button" disabled>Buy Upgrade (10 points)</button>
+      <button id="reset-button">Reset Game</button>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
+
 </html>
