@@ -1,6 +1,6 @@
 var score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
 var upgradeLevel = localStorage.getItem("upgradeLevel") ? parseInt(localStorage.getItem("upgradeLevel")) : 0;
-var upgradeCost = 10;
+var upgradeCost = localStorage.getItem("upgradeCost") ? parseInt(localStorage.getItem("upgradeCost")) : 10;
 
 // Function to generate a random color
 function generateRandomColor() {
@@ -51,6 +51,7 @@ function handleUpgradeClick() {
 function saveDataToLocalStorage() {
   localStorage.setItem("score", score.toString());
   localStorage.setItem("upgradeLevel", upgradeLevel.toString());
+  localStorage.setItem("upgradeCost", upgradeCost.toString());
 }
 
 // Function to handle the click event on the reset button
@@ -60,6 +61,7 @@ function handleResetClick() {
     localStorage.clear();
     score = 0;
     upgradeLevel = 0;
+    upgradeCost = 10;
     document.getElementById("score").textContent = "Score: " + score;
     document.getElementById("upgrade").textContent = "Upgrade: " + upgradeLevel;
     document.getElementById("upgrade-button").textContent = "Buy Upgrade (" + upgradeCost + " points)";
